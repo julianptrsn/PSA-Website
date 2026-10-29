@@ -834,6 +834,15 @@ section{padding:84px 0}
 /* map */
 .mapwrap{position:relative;height:560px;border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden;background:#F1ECE3}
 #map3,.leaflet-container{background:#F1ECE3}
+/* highlighted employer markers */
+.wsite-wrap{position:absolute;width:0;height:0}
+.wsite{position:absolute;left:0;top:0;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:5px;white-space:nowrap;background:var(--brass);color:#3a2708;font-family:var(--disp);font-weight:700;font-size:.74rem;letter-spacing:-.01em;padding:5px 10px 5px 8px;border-radius:999px;border:2px solid #fff;box-shadow:0 5px 14px rgba(16,40,45,.4);cursor:default}
+.wsite svg{width:13px;height:13px;flex:none}
+.maplegend{position:absolute;top:12px;right:12px;z-index:1000;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line-2);border-radius:11px;padding:9px 12px;font-size:.74rem;color:var(--ink-2);display:flex;flex-direction:column;gap:7px;box-shadow:0 6px 18px rgba(16,40,45,.12)}
+.maplegend .lg{display:flex;align-items:center;gap:8px;line-height:1}
+.maplegend .d{width:13px;height:13px;border-radius:50%;background:var(--pine);border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.25);flex:none}
+.maplegend .s{width:14px;height:14px;border-radius:5px;background:var(--brass);border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.25);flex:none}
+@media(max-width:560px){.maplegend{font-size:.68rem;padding:7px 9px;top:10px;right:10px}}
 #map3{height:100%}
 .map-fallback{height:100%;display:grid;place-items:center;color:var(--muted);font-size:.92rem}
 /* active pin -> name label */
@@ -1147,7 +1156,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:46px 0 30px;fon
       <button id="btn-map" data-view="map"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></svg><span data-t="ui.mapview">Karte</span></button>
     </div>
     <div id="view-gallery"><div class="agal" id="agal"></div></div>
-    <div id="view-map"><div class="mapwrap"><div id="map3"><div class="map-fallback" data-t="map.fallback">Karte wird geladen …</div></div><div class="mapcard" id="mapcard"></div></div></div>
+    <div id="view-map"><div class="mapwrap"><div id="map3"><div class="map-fallback" data-t="map.fallback">Karte wird geladen …</div></div><div class="maplegend"><div class="lg"><span class="d"></span><span data-t="map.legendApts">Wohnungen</span></div><div class="lg"><span class="s"></span><span data-t="map.legendWork">Große Arbeitgeber</span></div></div><div class="mapcard" id="mapcard"></div></div></div>
   </div>
 </section>
 
@@ -1494,7 +1503,7 @@ const I18N = {
     hero:{eyebrow:'Monteurunterkünfte · Flensburg & Umgebung',title:'Ein gutes Zuhause <em>auf Zeit</em> für Ihre Monteure.',lead:'Voll ausgestattete Apartments an mehreren Standorten in und um Flensburg – strandnah, gepflegt und wochen- oder monatsweise buchbar.',cta1:'Wohnungen ansehen',cta2:'Unverbindlich anfragen',badge:'Strandnah in Flensburg',scroll:'Entdecken'},
     stats:{locations:'Standorte',units:'Wohnungen',beds:'Betten',langs:'Sprachen'},
     ui:{gallery:'Galerie',mapview:'Karte',open:'Ansehen',photoSoon:'Foto folgt',close:'Schließen',prev:'Zurück',next:'Weiter',fullscreen:'Vollbild'},
-    map:{eyebrow:'Unsere Wohnungen',title:'Finden Sie die passende Unterkunft',intro:'Tippen Sie auf eine Wohnung – Fotos, Videos, Zimmeraufteilung und Anfrage auf einen Blick. Oder wechseln Sie in die Kartenansicht.',fallback:'Karte konnte nicht geladen werden.'},
+    map:{eyebrow:'Unsere Wohnungen',title:'Finden Sie die passende Unterkunft',intro:'Tippen Sie auf eine Wohnung – Fotos, Videos, Zimmeraufteilung und Anfrage auf einen Blick. Oder wechseln Sie in die Kartenansicht.',fallback:'Karte konnte nicht geladen werden.',legendApts:'Wohnungen',legendWork:'Große Arbeitgeber'},
     room:{double:'Doppelzimmer',triple:'Dreierzimmer',single:'Einzelzimmer',bath:'Bad',baths:'Bäder',kitchen:'Küche',living:'Wohnzimmer',beds:'Betten',persons:'Pers.'},
     card:{units:'Wohnungen',request:'Diese Wohnung anfragen'},
     detail:{rooms:'Zimmer & Etagen',media:'Bilder & Videos',location:'Lage'},
@@ -1519,7 +1528,7 @@ const I18N = {
     hero:{eyebrow:'Worker accommodation · Flensburg & region',title:'A good <em>home away from home</em> for your crew.',lead:'Fully equipped apartments across several locations in and around Flensburg – near the beach, well kept and bookable by the week or month.',cta1:'View apartments',cta2:'Send an enquiry',badge:'By the beach in Flensburg',scroll:'Discover'},
     stats:{locations:'Locations',units:'Apartments',beds:'Beds',langs:'Languages'},
     ui:{gallery:'Gallery',mapview:'Map',open:'View',photoSoon:'Photo soon',close:'Close',prev:'Previous',next:'Next',fullscreen:'Fullscreen'},
-    map:{eyebrow:'Our apartments',title:'Find the right accommodation',intro:'Tap an apartment – photos, videos, room layout and enquiry at a glance. Or switch to map view.',fallback:'The map could not be loaded.'},
+    map:{eyebrow:'Our apartments',title:'Find the right accommodation',intro:'Tap an apartment – photos, videos, room layout and enquiry at a glance. Or switch to map view.',fallback:'The map could not be loaded.',legendApts:'Apartments',legendWork:'Major employers'},
     room:{double:'Double room',triple:'Triple room',single:'Single room',bath:'Bath',baths:'Baths',kitchen:'Kitchen',living:'Living room',beds:'Beds',persons:'ppl'},
     card:{units:'apartments',request:'Enquire about this apartment'},
     detail:{rooms:'Rooms & floors',media:'Photos & videos',location:'Location'},
@@ -1544,7 +1553,7 @@ const I18N = {
     hero:{eyebrow:'Kwatery dla pracowników · Flensburg i okolice',title:'Dobry <em>dom na czas</em> dla Twojej ekipy.',lead:'W pełni wyposażone apartamenty w kilku lokalizacjach w okolicy Flensburga – blisko plaży, zadbane i do wynajęcia na tygodnie lub miesiące.',cta1:'Zobacz mieszkania',cta2:'Wyślij zapytanie',badge:'Blisko plaży we Flensburgu',scroll:'Odkryj'},
     stats:{locations:'Lokalizacje',units:'Mieszkania',beds:'Łóżka',langs:'Języki'},
     ui:{gallery:'Galeria',mapview:'Mapa',open:'Zobacz',photoSoon:'Zdjęcie wkrótce',close:'Zamknij',prev:'Wstecz',next:'Dalej',fullscreen:'Pełny ekran'},
-    map:{eyebrow:'Nasze mieszkania',title:'Znajdź odpowiednie zakwaterowanie',intro:'Kliknij mieszkanie – zdjęcia, wideo, układ pokoi i zapytanie w jednym miejscu. Lub przełącz na mapę.',fallback:'Nie udało się załadować mapy.'},
+    map:{eyebrow:'Nasze mieszkania',title:'Znajdź odpowiednie zakwaterowanie',intro:'Kliknij mieszkanie – zdjęcia, wideo, układ pokoi i zapytanie w jednym miejscu. Lub przełącz na mapę.',fallback:'Nie udało się załadować mapy.',legendApts:'Mieszkania',legendWork:'Więksi pracodawcy'},
     room:{double:'Pokój dwuosobowy',triple:'Pokój 3-osobowy',single:'Pokój jednoosobowy',bath:'Łazienka',baths:'Łazienki',kitchen:'Kuchnia',living:'Salon',beds:'Łóżka',persons:'os.'},
     card:{units:'mieszkania',request:'Zapytaj o to mieszkanie'},
     detail:{rooms:'Pokoje i piętra',media:'Zdjęcia i wideo',location:'Lokalizacja'},
@@ -1569,7 +1578,7 @@ const I18N = {
     hero:{eyebrow:'Cazare pentru muncitori · Flensburg și împrejurimi',title:'O <em>casă temporară</em> bună pentru echipa ta.',lead:'Apartamente complet echipate în mai multe locații din Flensburg și împrejurimi – aproape de plajă, îngrijite și de închiriat săptămânal sau lunar.',cta1:'Vezi apartamentele',cta2:'Trimite o cerere',badge:'Aproape de plajă în Flensburg',scroll:'Descoperă'},
     stats:{locations:'Locații',units:'Apartamente',beds:'Paturi',langs:'Limbi'},
     ui:{gallery:'Galerie',mapview:'Hartă',open:'Vezi',photoSoon:'Foto în curând',close:'Închide',prev:'Înapoi',next:'Înainte',fullscreen:'Ecran complet'},
-    map:{eyebrow:'Apartamentele noastre',title:'Găsește cazarea potrivită',intro:'Apasă pe un apartament – poze, videoclipuri, camere și cerere într-un singur loc. Sau treci la hartă.',fallback:'Harta nu a putut fi încărcată.'},
+    map:{eyebrow:'Apartamentele noastre',title:'Găsește cazarea potrivită',intro:'Apasă pe un apartament – poze, videoclipuri, camere și cerere într-un singur loc. Sau treci la hartă.',fallback:'Harta nu a putut fi încărcată.',legendApts:'Apartamente',legendWork:'Angajatori mari'},
     room:{double:'Cameră dublă',triple:'Cameră triplă',single:'Cameră single',bath:'Baie',baths:'Băi',kitchen:'Bucătărie',living:'Living',beds:'Paturi',persons:'pers.'},
     card:{units:'apartamente',request:'Solicită acest apartament'},
     detail:{rooms:'Camere și etaje',media:'Poze și videoclipuri',location:'Locație'},
@@ -1594,7 +1603,7 @@ const I18N = {
     hero:{eyebrow:'Жильё для рабочих · Фленсбург и окрестности',title:'Хороший <em>дом на время</em> для вашей бригады.',lead:'Полностью оборудованные апартаменты в нескольких локациях во Фленсбурге и рядом – у пляжа, ухоженные, аренда понедельно или помесячно.',cta1:'Смотреть квартиры',cta2:'Отправить запрос',badge:'У пляжа во Фленсбурге',scroll:'Открыть'},
     stats:{locations:'Локации',units:'Квартиры',beds:'Кровати',langs:'Языки'},
     ui:{gallery:'Галерея',mapview:'Карта',open:'Смотреть',photoSoon:'Фото скоро',close:'Закрыть',prev:'Назад',next:'Далее',fullscreen:'Во весь экран'},
-    map:{eyebrow:'Наши квартиры',title:'Найдите подходящее жильё',intro:'Нажмите на квартиру – фото, видео, планировка и запрос в одном месте. Или переключитесь на карту.',fallback:'Не удалось загрузить карту.'},
+    map:{eyebrow:'Наши квартиры',title:'Найдите подходящее жильё',intro:'Нажмите на квартиру – фото, видео, планировка и запрос в одном месте. Или переключитесь на карту.',fallback:'Не удалось загрузить карту.',legendApts:'Квартиры',legendWork:'Крупные работодатели'},
     room:{double:'Двухместная комната',triple:'Трёхместная комната',single:'Одноместная комната',bath:'Ванная',baths:'Ванные',kitchen:'Кухня',living:'Гостиная',beds:'Кровати',persons:'чел.'},
     card:{units:'кв.',request:'Запросить эту квартиру'},
     detail:{rooms:'Комнаты и этажи',media:'Фото и видео',location:'Расположение'},
@@ -1801,6 +1810,19 @@ function lbClose(){ document.getElementById('lightbox').classList.remove('open')
 function lbIsOpen(){ return document.getElementById('lightbox').classList.contains('open'); }
 
 /* ===== MAP ===== */
+const WORKSITES=[
+  {s:'FSG', name:'Flensburger Schiffbau-Gesellschaft (FSG)', lat:54.808378, lng:9.430183},
+  {s:'FFG', name:'Flensburger Fahrzeugbau (FFG)', lat:54.797740, lng:9.428294},
+];
+const WS_ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l5.5 3.5V9L14 12.5V9l6 3.5V21z"/><path d="M2.5 21h19"/></svg>';
+function drawWorksites(Lf){
+  WORKSITES.forEach(w=>{
+    const icon=Lf.divIcon({className:'',html:`<div class="wsite-wrap"><div class="wsite" title="${w.name}">${WS_ICON}${w.s}</div></div>`,iconSize:[0,0],iconAnchor:[0,0]});
+    const m=Lf.marker([w.lat,w.lng],{icon,keyboard:false,zIndexOffset:-200}).addTo(map);
+    m.bindTooltip(w.name,{direction:'top',offset:[0,-10],opacity:.95});
+    m.on('click',()=>closeMapCard());
+  });
+}
 window.GEO=window.GEO||null;
 function drawBasemap(Lf){
   const G=window.GEO; if(!G||!map)return;
@@ -1818,6 +1840,7 @@ function buildMap(){
   const Lf=window.L; document.getElementById('map3').innerHTML='';
   map=Lf.map('map3',{scrollWheelZoom:false}).setView([54.792,9.44],12);
   drawBasemap(Lf);
+  drawWorksites(Lf);
   if(map.attributionControl) map.attributionControl.addAttribution('Karte © OpenStreetMap');
   const pts=buildings.map(b=>[b.lat,b.lng]);
   map.fitBounds(pts,{padding:[40,40],animate:false});
