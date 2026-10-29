@@ -1225,27 +1225,29 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:46px 0 30px;fon
         <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span data-t="contact.area">Flensburg & Umgebung</span></div>
         <div class="c-note"><strong data-t="contact.boxTitle">Schnelle Antwort garantiert</strong><p data-t="contact.boxText">Wir bearbeiten Anfragen in der Regel noch am selben Werktag.</p></div>
       </div>
-      <div class="form reveal">
+      <form class="form reveal" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm">
+        <input type="hidden" name="form-name" value="kontakt">
+        <p hidden><label>Bitte leer lassen: <input name="bot-field"></label></p>
         <div class="frow">
-          <div class="field"><label data-t="contact.fName">Name</label><input id="f-name"></div>
-          <div class="field"><label data-t="contact.fCompany">Firma</label><input id="f-company"></div>
+          <div class="field"><label data-t="contact.fName">Name</label><input id="f-name" name="Name"></div>
+          <div class="field"><label data-t="contact.fCompany">Firma</label><input id="f-company" name="Firma"></div>
         </div>
         <div class="frow">
-          <div class="field"><label data-t="contact.fEmail">E-Mail</label><input type="email" id="f-email"></div>
-          <div class="field"><label data-t="contact.fPhone">Telefon</label><input type="tel" id="f-phone"></div>
+          <div class="field"><label data-t="contact.fEmail">E-Mail</label><input type="email" id="f-email" name="E-Mail"></div>
+          <div class="field"><label data-t="contact.fPhone">Telefon</label><input type="tel" id="f-phone" name="Telefon"></div>
         </div>
         <div class="frow">
-          <div class="field"><label data-t="contact.fFrom">Von</label><input type="date" id="f-from"></div>
-          <div class="field"><label><span data-t="contact.fDuration">Voraussichtlich bis</span> <b class="req">*</b></label><input type="date" id="f-duration" required></div>
+          <div class="field"><label data-t="contact.fFrom">Von</label><input type="date" id="f-from" name="Von"></div>
+          <div class="field"><label><span data-t="contact.fDuration">Voraussichtlich bis</span> <b class="req">*</b></label><input type="date" id="f-duration" name="Voraussichtlich bis" required></div>
         </div>
         <div class="frow">
-          <div class="field"><label data-t="contact.fPersons">Anzahl Monteure</label><input type="number" min="1" id="f-persons"></div>
-          <div class="field"><label data-t="contact.fApt">Wunsch-Wohnung (optional)</label><select id="f-apt"></select></div>
+          <div class="field"><label data-t="contact.fPersons">Anzahl Monteure</label><input type="number" min="1" id="f-persons" name="Anzahl Monteure"></div>
+          <div class="field"><label data-t="contact.fApt">Wunsch-Wohnung (optional)</label><select id="f-apt" name="Wunsch-Wohnung"></select></div>
         </div>
-        <div class="field"><label data-t="contact.fMsg">Nachricht</label><textarea id="f-msg"></textarea></div>
-        <button class="submit" id="sendBtn" data-t="contact.submit">Anfrage senden</button>
-        <div class="success" id="successMsg" data-t="contact.success">Vielen Dank! Ihre Anfrage wird in Ihrem E-Mail-Programm geöffnet.</div>
-      </div>
+        <div class="field"><label data-t="contact.fMsg">Nachricht</label><textarea id="f-msg" name="Nachricht"></textarea></div>
+        <button type="submit" class="submit" id="sendBtn" data-t="contact.submit">Anfrage senden</button>
+        <div class="success" id="successMsg" data-t="contact.success">Vielen Dank! Ihre Anfrage ist bei uns eingegangen – wir melden uns in der Regel noch am selben Werktag.</div>
+      </form>
     </div>
   </div>
 </section>
@@ -1510,7 +1512,7 @@ const I18N = {
     about:{eyebrow:'Über uns',quote:'„Gepflegte Wohnungen, persönlicher Kontakt und schnelle Antworten – <em>damit Sie sich auf Ihr Projekt konzentrieren können.</em>"',who:'Wir vermieten hochwertige Monteurwohnungen in Flensburg und Umgebung – für kleine Teams wie für große Crews, wochen- oder monatsweise und unkompliziert.',sBeds:'Betten verfügbar',sLoc:'Standorte',sBeach:'zufriedene Übernachtungsgäste',guestsN:'5.000+',sContact:'erreichbar',whyTitle:'Warum bei uns buchen?',why1t:'Spürbar hochwertiger ausgestattet',why1d:'Unsere Wohnungen sind deutlich besser ausgestattet als die meisten Monteurunterkünfte – damit nach Feierabend echtes Wohlfühlen aufkommt.',why2t:'Gemacht für Monteure',why2d:'Jede Wohnung ist konsequent auf den Alltag von Monteuren zugeschnitten – von genügend Betten über die voll ausgestattete Küche bis zu schnellem WLAN.',why3t:'Gäste, die wiederkommen',why3d:'Wir legen Wert darauf, dass sich Ihre Leute so wohlfühlen, dass sie beim nächsten Projekt in Flensburg wieder bei uns wohnen wollen.'},
     rules:{eyebrow:'Hausordnung',title:'Ein paar einfache Regeln',intro:'Damit sich alle wohlfühlen und das Zusammenleben reibungslos funktioniert.',items:[
       'Ruhezeiten von 22:00 bis 06:00 Uhr einhalten.','Rauchen nur in den ausgewiesenen Außenbereichen.','Zimmer pfleglich behandeln und sauber halten.','Gemeinschaftsküche und Bäder sauber hinterlassen.','Müll trennen und ordnungsgemäß entsorgen.','Keine unangemeldeten Übernachtungsgäste.','Schäden bitte umgehend melden.']},
-    contact:{eyebrow:'Kontakt',title:'Wohnung anfragen',intro:'Sagen Sie uns, wann und für wie viele Monteure Sie eine Unterkunft brauchen – wir melden uns umgehend.',area:'Flensburg & Umgebung',boxTitle:'Schnelle Antwort garantiert',boxText:'Wir bearbeiten Anfragen in der Regel noch am selben Werktag.',fName:'Name',fCompany:'Firma',fEmail:'E-Mail',fPhone:'Telefon',fFrom:'Von',fPersons:'Anzahl Monteure',fDuration:'Voraussichtlich bis',durationReq:'Bitte geben Sie an, bis wann die Wohnung voraussichtlich benötigt wird.',fApt:'Wunsch-Wohnung (optional)',fAptNone:'Keine Angabe',fMsg:'Nachricht',submit:'Anfrage senden',success:'Vielen Dank! Ihre Anfrage wird in Ihrem E-Mail-Programm geöffnet.'},
+    contact:{eyebrow:'Kontakt',title:'Wohnung anfragen',intro:'Sagen Sie uns, wann und für wie viele Monteure Sie eine Unterkunft brauchen – wir melden uns umgehend.',area:'Flensburg & Umgebung',boxTitle:'Schnelle Antwort garantiert',boxText:'Wir bearbeiten Anfragen in der Regel noch am selben Werktag.',fName:'Name',fCompany:'Firma',fEmail:'E-Mail',fPhone:'Telefon',fFrom:'Von',fPersons:'Anzahl Monteure',fDuration:'Voraussichtlich bis',durationReq:'Bitte geben Sie an, bis wann die Wohnung voraussichtlich benötigt wird.',fApt:'Wunsch-Wohnung (optional)',fAptNone:'Keine Angabe',fMsg:'Nachricht',submit:'Anfrage senden',success:'Vielen Dank! Ihre Anfrage ist bei uns eingegangen – wir melden uns in der Regel noch am selben Werktag.'},
     footer:{privacy:'Datenschutz',imprint:'Impressum',made:'Entwurf · alle Angaben vorbehaltlich'} },
 
   en:{ nav:{locations:'Apartments',services:'Services',about:'About us',rules:'House rules',contact:'Contact',cta:'Enquire'},
@@ -1535,7 +1537,7 @@ const I18N = {
     about:{eyebrow:'About us',quote:'"Well-kept apartments, personal contact and fast replies – <em>so you can focus on your project.</em>"',who:'We rent high-quality worker apartments in and around Flensburg – for small teams and large crews alike, by the week or month, without hassle.',sBeds:'Beds available',sLoc:'Locations',sBeach:'happy overnight guests',guestsN:'5,000+',sContact:'reachable',whyTitle:'Why book with us?',why1t:'Noticeably better equipped',why1d:'Our apartments are fitted to a far higher standard than most worker accommodation – so your crew can truly unwind after work.',why2t:'Made for tradespeople',why2d:'Every apartment is built around the daily needs of workers – from enough beds and a fully equipped kitchen to fast Wi-Fi.',why3t:'Guests who come back',why3d:'We want your people to feel so at home that they choose us again for their next project in Flensburg.'},
     rules:{eyebrow:'House rules',title:'A few simple rules',intro:'So everyone feels comfortable and living together runs smoothly.',items:[
       'Quiet hours from 10 pm to 6 am.','Smoking only in the designated outdoor areas.','Treat the rooms with care and keep them clean.','Leave the shared kitchen and bathrooms clean.','Separate and dispose of waste properly.','No unregistered overnight guests.','Please report any damage immediately.']},
-    contact:{eyebrow:'Contact',title:'Enquire about an apartment',intro:'Tell us when and for how many workers you need accommodation – we will get back to you right away.',area:'Flensburg & region',boxTitle:'Fast reply guaranteed',boxText:'We usually handle enquiries the same working day.',fName:'Name',fCompany:'Company',fEmail:'Email',fPhone:'Phone',fFrom:'From',fPersons:'Number of workers',fDuration:'Estimated end date',durationReq:'Please enter the date until which you expect to need the apartment.',fApt:'Preferred apartment (optional)',fAptNone:'No preference',fMsg:'Message',submit:'Send enquiry',success:'Thank you! Your enquiry will open in your email app.'},
+    contact:{eyebrow:'Contact',title:'Enquire about an apartment',intro:'Tell us when and for how many workers you need accommodation – we will get back to you right away.',area:'Flensburg & region',boxTitle:'Fast reply guaranteed',boxText:'We usually handle enquiries the same working day.',fName:'Name',fCompany:'Company',fEmail:'Email',fPhone:'Phone',fFrom:'From',fPersons:'Number of workers',fDuration:'Estimated end date',durationReq:'Please enter the date until which you expect to need the apartment.',fApt:'Preferred apartment (optional)',fAptNone:'No preference',fMsg:'Message',submit:'Send enquiry',success:'Thank you! We have received your enquiry and usually get back to you the same working day.'},
     footer:{privacy:'Privacy',imprint:'Imprint',made:'Draft · all details subject to change'} },
 
   pl:{ nav:{locations:'Mieszkania',services:'Usługi',about:'O nas',rules:'Regulamin',contact:'Kontakt',cta:'Zapytaj'},
@@ -1560,7 +1562,7 @@ const I18N = {
     about:{eyebrow:'O nas',quote:'„Zadbane mieszkania, osobisty kontakt i szybkie odpowiedzi – <em>abyś mógł skupić się na projekcie.</em>"',who:'Wynajmujemy wysokiej jakości kwatery pracownicze we Flensburgu i okolicach – dla małych zespołów i dużych ekip, na tygodnie lub miesiące, bez komplikacji.',sBeds:'dostępnych łóżek',sLoc:'lokalizacji',sBeach:'zadowolonych gości',guestsN:'5.000+',sContact:'dostępni',whyTitle:'Dlaczego warto u nas?',why1t:'Wyraźnie lepiej wyposażone',why1d:'Nasze mieszkania są wyposażone na znacznie wyższym poziomie niż większość kwater pracowniczych – aby po pracy można było naprawdę odpocząć.',why2t:'Stworzone dla monterów',why2d:'Każde mieszkanie jest dopasowane do codzienności pracowników – od wystarczającej liczby łóżek po w pełni wyposażoną kuchnię i szybkie Wi-Fi.',why3t:'Goście, którzy wracają',why3d:'Zależy nam, aby Twoi ludzie czuli się tak dobrze, że przy następnym projekcie we Flensburgu znów wybiorą nas.'},
     rules:{eyebrow:'Regulamin',title:'Kilka prostych zasad',intro:'Aby wszyscy czuli się dobrze, a wspólne mieszkanie działało bez problemów.',items:[
       'Cisza nocna od 22:00 do 6:00.','Palenie tylko w wyznaczonych miejscach na zewnątrz.','Traktuj pokoje z szacunkiem i utrzymuj je w czystości.','Pozostaw wspólną kuchnię i łazienki w czystości.','Segreguj i wyrzucaj odpady zgodnie z zasadami.','Bez niezgłoszonych gości na nocleg.','Uszkodzenia zgłaszaj natychmiast.']},
-    contact:{eyebrow:'Kontakt',title:'Zapytaj o mieszkanie',intro:'Napisz, kiedy i dla ilu pracowników potrzebujesz zakwaterowania – odezwiemy się niezwłocznie.',area:'Flensburg i okolice',boxTitle:'Szybka odpowiedź gwarantowana',boxText:'Zapytania obsługujemy zwykle tego samego dnia roboczego.',fName:'Imię i nazwisko',fCompany:'Firma',fEmail:'E-mail',fPhone:'Telefon',fFrom:'Od',fPersons:'Liczba pracowników',fDuration:'Przewidywany koniec najmu',durationReq:'Podaj datę, do której przewidujesz potrzebę mieszkania.',fApt:'Preferowane mieszkanie (opcjonalnie)',fAptNone:'Bez preferencji',fMsg:'Wiadomość',submit:'Wyślij zapytanie',success:'Dziękujemy! Zapytanie otworzy się w Twoim programie pocztowym.'},
+    contact:{eyebrow:'Kontakt',title:'Zapytaj o mieszkanie',intro:'Napisz, kiedy i dla ilu pracowników potrzebujesz zakwaterowania – odezwiemy się niezwłocznie.',area:'Flensburg i okolice',boxTitle:'Szybka odpowiedź gwarantowana',boxText:'Zapytania obsługujemy zwykle tego samego dnia roboczego.',fName:'Imię i nazwisko',fCompany:'Firma',fEmail:'E-mail',fPhone:'Telefon',fFrom:'Od',fPersons:'Liczba pracowników',fDuration:'Przewidywany koniec najmu',durationReq:'Podaj datę, do której przewidujesz potrzebę mieszkania.',fApt:'Preferowane mieszkanie (opcjonalnie)',fAptNone:'Bez preferencji',fMsg:'Wiadomość',submit:'Wyślij zapytanie',success:'Dziękujemy! Otrzymaliśmy Twoje zapytanie i zwykle odpowiadamy jeszcze tego samego dnia roboczego.'},
     footer:{privacy:'Prywatność',imprint:'Nota prawna',made:'Wersja robocza · dane mogą ulec zmianie'} },
 
   ro:{ nav:{locations:'Apartamente',services:'Servicii',about:'Despre noi',rules:'Regulament',contact:'Contact',cta:'Solicită'},
@@ -1585,7 +1587,7 @@ const I18N = {
     about:{eyebrow:'Despre noi',quote:'„Apartamente îngrijite, contact personal și răspunsuri rapide – <em>ca să te poți concentra pe proiectul tău.</em>"',who:'Închiriem apartamente de calitate pentru muncitori în Flensburg și împrejurimi – pentru echipe mici și mari deopotrivă, săptămânal sau lunar, fără bătăi de cap.',sBeds:'paturi disponibile',sLoc:'locații',sBeach:'oaspeți mulțumiți',guestsN:'5.000+',sContact:'disponibili',whyTitle:'De ce să rezervi la noi?',why1t:'Dotări vizibil superioare',why1d:'Apartamentele noastre sunt dotate la un nivel mult mai ridicat decât majoritatea cazărilor pentru muncitori – ca echipa ta să se relaxeze cu adevărat după muncă.',why2t:'Gândite pentru muncitori',why2d:'Fiecare apartament este adaptat vieții de zi cu zi a muncitorilor – de la suficiente paturi la bucătărie complet utilată și Wi-Fi rapid.',why3t:'Oaspeți care revin',why3d:'Ne dorim ca oamenii tăi să se simtă atât de bine încât, la următorul proiect din Flensburg, să aleagă din nou să stea la noi.'},
     rules:{eyebrow:'Regulament',title:'Câteva reguli simple',intro:'Ca toată lumea să se simtă bine și conviețuirea să fie fără probleme.',items:[
       'Liniște între orele 22:00 și 6:00.','Fumatul doar în zonele exterioare desemnate.','Tratați camerele cu grijă și păstrați-le curate.','Lasă bucătăria și băile comune curate.','Separă și aruncă gunoiul corect.','Fără oaspeți peste noapte neanunțați.','Anunță imediat orice defecțiune.']},
-    contact:{eyebrow:'Contact',title:'Solicită un apartament',intro:'Spune-ne când și pentru câți muncitori ai nevoie de cazare – revenim imediat.',area:'Flensburg și împrejurimi',boxTitle:'Răspuns rapid garantat',boxText:'De obicei procesăm cererile în aceeași zi lucrătoare.',fName:'Nume',fCompany:'Firmă',fEmail:'E-mail',fPhone:'Telefon',fFrom:'De la',fPersons:'Număr muncitori',fDuration:'Data estimată de sfârșit',durationReq:'Vă rugăm să indicați data până la care veți avea nevoie de apartament.',fApt:'Apartament preferat (opțional)',fAptNone:'Fără preferință',fMsg:'Mesaj',submit:'Trimite cererea',success:'Mulțumim! Cererea se va deschide în aplicația ta de e-mail.'},
+    contact:{eyebrow:'Contact',title:'Solicită un apartament',intro:'Spune-ne când și pentru câți muncitori ai nevoie de cazare – revenim imediat.',area:'Flensburg și împrejurimi',boxTitle:'Răspuns rapid garantat',boxText:'De obicei procesăm cererile în aceeași zi lucrătoare.',fName:'Nume',fCompany:'Firmă',fEmail:'E-mail',fPhone:'Telefon',fFrom:'De la',fPersons:'Număr muncitori',fDuration:'Data estimată de sfârșit',durationReq:'Vă rugăm să indicați data până la care veți avea nevoie de apartament.',fApt:'Apartament preferat (opțional)',fAptNone:'Fără preferință',fMsg:'Mesaj',submit:'Trimite cererea',success:'Mulțumim! Am primit cererea ta și revenim de regulă în aceeași zi lucrătoare.'},
     footer:{privacy:'Confidențialitate',imprint:'Notă legală',made:'Ciornă · datele pot fi modificate'} },
 
   ru:{ nav:{locations:'Квартиры',services:'Услуги',about:'О нас',rules:'Правила',contact:'Контакт',cta:'Запрос'},
@@ -1610,7 +1612,7 @@ const I18N = {
     about:{eyebrow:'О нас',quote:'«Ухоженные квартиры, личный контакт и быстрые ответы – <em>чтобы вы могли сосредоточиться на проекте.</em>»',who:'Мы сдаём качественное жильё для рабочих во Фленсбурге и окрестностях – для небольших команд и больших бригад, понедельно или помесячно, без хлопот.',sBeds:'кроватей доступно',sLoc:'локаций',sBeach:'довольных гостей',guestsN:'5.000+',sContact:'на связи',whyTitle:'Почему стоит выбрать нас?',why1t:'Заметно лучше оборудованы',why1d:'Наши квартиры оснащены на гораздо более высоком уровне, чем большинство жилья для рабочих – чтобы после смены можно было по-настоящему отдохнуть.',why2t:'Сделано для монтажников',why2d:'Каждая квартира продумана под повседневные нужды рабочих – от достаточного числа кроватей до полностью оснащённой кухни и быстрого Wi-Fi.',why3t:'Гости, которые возвращаются',why3d:'Нам важно, чтобы вашим людям было так комфортно, что в следующий проект во Фленсбурге они снова захотели остановиться у нас.'},
     rules:{eyebrow:'Правила',title:'Несколько простых правил',intro:'Чтобы всем было комфортно и совместное проживание проходило гладко.',items:[
       'Тихие часы с 22:00 до 6:00.','Курение только в отведённых местах на улице.','Бережно относитесь к комнатам и поддерживайте чистоту.','Оставляйте общую кухню и ванные чистыми.','Сортируйте и выбрасывайте мусор правильно.','Без незаявленных гостей на ночь.','О повреждениях сообщайте сразу.']},
-    contact:{eyebrow:'Контакт',title:'Запрос квартиры',intro:'Напишите, когда и на сколько рабочих нужно жильё – мы свяжемся с вами сразу.',area:'Фленсбург и окрестности',boxTitle:'Быстрый ответ гарантирован',boxText:'Обычно обрабатываем запросы в тот же рабочий день.',fName:'Имя',fCompany:'Компания',fEmail:'E-mail',fPhone:'Телефон',fFrom:'С',fPersons:'Количество рабочих',fDuration:'Предполагаемая дата окончания',durationReq:'Укажите дату, до которой предположительно нужна квартира.',fApt:'Желаемая квартира (необязательно)',fAptNone:'Без предпочтений',fMsg:'Сообщение',submit:'Отправить запрос',success:'Спасибо! Ваш запрос откроется в почтовом приложении.'},
+    contact:{eyebrow:'Контакт',title:'Запрос квартиры',intro:'Напишите, когда и на сколько рабочих нужно жильё – мы свяжемся с вами сразу.',area:'Фленсбург и окрестности',boxTitle:'Быстрый ответ гарантирован',boxText:'Обычно обрабатываем запросы в тот же рабочий день.',fName:'Имя',fCompany:'Компания',fEmail:'E-mail',fPhone:'Телефон',fFrom:'С',fPersons:'Количество рабочих',fDuration:'Предполагаемая дата окончания',durationReq:'Укажите дату, до которой предположительно нужна квартира.',fApt:'Желаемая квартира (необязательно)',fAptNone:'Без предпочтений',fMsg:'Сообщение',submit:'Отправить запрос',success:'Спасибо! Мы получили ваш запрос и обычно отвечаем в тот же рабочий день.'},
     footer:{privacy:'Конфиденциальность',imprint:'Выходные данные',made:'Черновик · данные могут измениться'} },
 };
 
@@ -1966,14 +1968,26 @@ document.addEventListener('keydown',e=>{
 document.getElementById('langsel').addEventListener('change',e=>{ LANG=e.target.value; buildLangSelect(); applyLang(); });
 document.getElementById('burger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.toggle('open'));
 document.querySelectorAll('#mobileMenu a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open')));
-document.getElementById('sendBtn').addEventListener('click',()=>{
+document.getElementById('contactForm').addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  const form=e.currentTarget;
   const g=id=>document.getElementById(id).value;
   const durField=document.getElementById('f-duration').closest('.field');
   if(!g('f-duration')){ durField.classList.add('err'); document.getElementById('f-duration').focus(); alert(tt('contact.durationReq')); return; }
   durField.classList.remove('err');
-  const body=`${tt('contact.fName')}: ${g('f-name')}\n${tt('contact.fCompany')}: ${g('f-company')}\n${tt('contact.fEmail')}: ${g('f-email')}\n${tt('contact.fPhone')}: ${g('f-phone')}\n${tt('contact.fFrom')}: ${g('f-from')}\n${tt('contact.fDuration')}: ${g('f-duration')}\n${tt('contact.fPersons')}: ${g('f-persons')}\n${tt('contact.fApt')}: ${g('f-apt')}\n\n${g('f-msg')}`;
-  document.getElementById('successMsg').style.display='block';
-  window.location.href=`mailto:info@psaimmobilien.de?subject=${encodeURIComponent(tt('nav.cta')+' – Monteur Apartments Flensburg')}&body=${encodeURIComponent(body)}`;
+  const mailtoFallback=()=>{
+    const body=`${tt('contact.fName')}: ${g('f-name')}\n${tt('contact.fCompany')}: ${g('f-company')}\n${tt('contact.fEmail')}: ${g('f-email')}\n${tt('contact.fPhone')}: ${g('f-phone')}\n${tt('contact.fFrom')}: ${g('f-from')}\n${tt('contact.fDuration')}: ${g('f-duration')}\n${tt('contact.fPersons')}: ${g('f-persons')}\n${tt('contact.fApt')}: ${g('f-apt')}\n\n${g('f-msg')}`;
+    window.location.href=`mailto:info@psaimmobilien.de?subject=${encodeURIComponent(tt('nav.cta')+' – Monteur Apartments Flensburg')}&body=${encodeURIComponent(body)}`;
+  };
+  const btn=document.getElementById('sendBtn'); btn.disabled=true;
+  try{
+    const res=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});
+    if(!res.ok) throw new Error('post failed');
+    document.getElementById('successMsg').style.display='block';
+    form.reset(); renderAptSelect();
+  }catch(err){
+    mailtoFallback();
+  }finally{ btn.disabled=false; }
 });
 document.getElementById('f-duration').addEventListener('change',e=>{ if(e.target.value) e.target.closest('.field').classList.remove('err'); });
 (function(){ const today=new Date().toISOString().slice(0,10); const from=document.getElementById('f-from'), to=document.getElementById('f-duration');
