@@ -1669,7 +1669,7 @@ const LANGS = [
   ['it','Italiano'],['lt','Lietuvių'],['lv','Latviešu'],['nl','Nederlands'],['no','Norsk'],
   ['pt','Português'],['sk','Slovenčina'],['sl','Slovenščina'],['sv','Svenska'],['tr','Türkçe'],['uk','Українська']
 ];
-const READY=new Set(['de','en','pl','ro','ru','fr','es','it','pt','nl','sv','fi','cs','sk','sl','hr','tr','el','bg','uk','et','lv','lt']);
+const READY=new Set(['de','en','pl','ro','ru','fr','es','it','pt','nl','da','sv','no','fi','cs','sk','sl','hr','hu','tr','el','bg','uk','et','lv','lt']);
 let LANG='de';
 const dict=()=>I18N[READY.has(LANG)?LANG:'en'];
 function tt(p){let o=dict();for(const k of p.split('.'))o=o&&o[k];return o==null?p:o;}
