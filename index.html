@@ -708,6 +708,13 @@ svg.leaflet-image-layer.leaflet-interactive path {
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.58;-webkit-font-smoothing:antialiased}
+/* one continuous, page-wide ambient wash (fixed, does not restart per section) */
+.pagebg{position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+  radial-gradient(46% 36% at 10% 6%, rgba(22,58,67,.09), transparent 70%),
+  radial-gradient(42% 32% at 92% 15%, rgba(231,163,62,.10), transparent 70%),
+  radial-gradient(48% 40% at 84% 68%, rgba(62,110,126,.08), transparent 72%),
+  radial-gradient(44% 36% at 14% 84%, rgba(231,163,62,.07), transparent 72%),
+  radial-gradient(50% 42% at 50% 44%, rgba(22,58,67,.05), transparent 75%)}
 h1,h2,h3{font-family:var(--disp);font-weight:600;line-height:1.05;margin:0;letter-spacing:-.025em}
 a{color:inherit}
 img,video{display:block;max-width:100%}
@@ -781,7 +788,7 @@ nav.main a:hover{color:var(--pine);background:rgba(22,58,67,.08)}
 .hero-scroll .mouse::after{content:"";position:absolute;top:7px;left:50%;width:3px;height:7px;border-radius:2px;background:#fff;transform:translateX(-50%);animation:scrollDot 1.8s ease-in-out infinite}
 @keyframes scrollDot{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}60%{opacity:1;transform:translate(-50%,10px)}100%{opacity:0;transform:translate(-50%,12px)}}
 /* stats band below hero */
-.statband{background:var(--bg-2);color:var(--ink);padding:0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.statband{background:transparent;color:var(--ink);padding:0}
 .statband .wrap{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0;padding:44px 16px 40px;max-width:860px}
 .hstat{position:relative;display:flex;flex-direction:column;align-items:center;gap:9px;padding:6px 52px;text-align:center}
 .hstat+.hstat::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);height:46px;width:1px;background:var(--line)}
@@ -965,10 +972,11 @@ body.admin .admin-badge:hover{opacity:1}
 .d-hint{font-size:.74rem;color:var(--muted);margin-top:12px}
 
 /* services */
-#leistungen{background:var(--bg-2)}
+#leistungen{background:transparent}
 .svc-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
-.svc{background:var(--card);border:1px solid var(--line-2);border-radius:var(--r);padding:24px;flex:0 1 calc(25% - 12px)}
-.svc .ic{width:46px;height:46px;border-radius:12px;background:var(--pine-soft);color:var(--pine);display:grid;place-items:center;margin-bottom:14px}
+.svc{background:linear-gradient(180deg,rgba(255,255,255,.56),rgba(255,255,255,.40));backdrop-filter:blur(22px) saturate(1.6);-webkit-backdrop-filter:blur(22px) saturate(1.6);border:1px solid rgba(255,255,255,.65);border-radius:var(--r);padding:24px;flex:0 1 calc(25% - 12px);box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 12px 30px rgba(16,40,45,.13);transition:transform .22s ease,box-shadow .28s ease,background .28s ease}
+.svc:hover{transform:translateY(-4px);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 20px 44px rgba(16,40,45,.2)}
+.svc .ic{width:46px;height:46px;border-radius:12px;background:rgba(22,58,67,.12);border:1px solid rgba(255,255,255,.5);color:var(--pine);display:grid;place-items:center;margin-bottom:14px}
 .svc .ic svg{width:23px;height:23px}
 .svc h3{font-size:1.08rem;font-weight:500;margin-bottom:6px}
 .svc p{font-size:.9rem;color:var(--ink-2);margin:0}
@@ -979,7 +987,7 @@ body.admin .admin-badge:hover{opacity:1}
 .about blockquote em{font-style:normal;color:var(--pine)}
 .about .who{margin-top:22px;color:var(--ink-2)}
 .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.about-stats .b{background:var(--card);border:1px solid var(--line-2);border-radius:var(--r);padding:22px}
+.about-stats .b{background:linear-gradient(180deg,rgba(255,255,255,.56),rgba(255,255,255,.40));backdrop-filter:blur(22px) saturate(1.6);-webkit-backdrop-filter:blur(22px) saturate(1.6);border:1px solid rgba(255,255,255,.65);border-radius:var(--r);padding:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 12px 30px rgba(16,40,45,.13)}
 .about-stats .n{font-family:var(--disp);font-size:2.2rem;font-weight:600;color:var(--pine);letter-spacing:-.03em;font-feature-settings:"tnum" 1}
 .about-stats .l{font-size:.86rem;color:var(--muted);margin-top:4px}
 .why{margin-top:60px;padding-top:46px;border-top:1px solid var(--line-2)}
@@ -993,8 +1001,8 @@ body.admin .admin-badge:hover{opacity:1}
 
 /* rules */
 .rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.rule{display:flex;gap:14px;background:var(--card);border:1px solid var(--line-2);border-radius:var(--r);padding:20px}
-.rule .rn{width:30px;height:30px;flex:none;border-radius:9px;background:var(--brass-soft);color:var(--brass);font-family:var(--disp);font-weight:500;display:grid;place-items:center}
+.rule{display:flex;gap:14px;background:linear-gradient(180deg,rgba(255,255,255,.56),rgba(255,255,255,.40));backdrop-filter:blur(22px) saturate(1.6);-webkit-backdrop-filter:blur(22px) saturate(1.6);border:1px solid rgba(255,255,255,.65);border-radius:var(--r);padding:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 12px 30px rgba(16,40,45,.13)}
+.rule .rn{width:30px;height:30px;flex:none;border-radius:9px;background:rgba(231,163,62,.18);border:1px solid rgba(255,255,255,.5);color:var(--brass);font-family:var(--disp);font-weight:500;display:grid;place-items:center}
 .rule p{margin:0;font-size:.95rem}
 
 /* contact */
@@ -1099,6 +1107,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:46px 0 30px;fon
 </style>
 </head>
 <body>
+<div class="pagebg" aria-hidden="true"></div>
 
 <header id="hdr">
   <div class="wrap bar">
