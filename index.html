@@ -1706,25 +1706,25 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:46px 0 30px;fon
         <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span data-t="contact.area">Flensburg & Umgebung</span></div>
         <div class="c-note"><strong data-t="contact.boxTitle">Schnelle Antwort garantiert</strong><p data-t="contact.boxText">Wir bearbeiten Anfragen in der Regel noch am selben Werktag.</p></div>
       </div>
-      <form class="form reveal" id="contactForm">
+      <form class="form reveal" id="contactForm" novalidate>
         <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
         <div class="frow">
-          <div class="field"><label data-t="contact.fName">Name</label><input id="f-name" name="Name"></div>
-          <div class="field"><label data-t="contact.fCompany">Firma</label><input id="f-company" name="Firma"></div>
+          <div class="field"><label><span data-t="contact.fName">Name</span> <b class="req">*</b></label><input id="f-name" name="Name"></div>
+          <div class="field"><label><span data-t="contact.fCompany">Firma</span> <b class="req">*</b></label><input id="f-company" name="Firma"></div>
         </div>
         <div class="frow">
-          <div class="field"><label data-t="contact.fEmail">E-Mail</label><input type="email" id="f-email" name="E-Mail"></div>
+          <div class="field"><label><span data-t="contact.fEmail">E-Mail</span> <b class="req">*</b></label><input type="email" id="f-email" name="E-Mail"></div>
           <div class="field"><label data-t="contact.fPhone">Telefon</label><input type="tel" id="f-phone" name="Telefon"></div>
         </div>
         <div class="frow">
-          <div class="field"><label data-t="contact.fFrom">Von</label><input type="date" id="f-from" name="Von"></div>
+          <div class="field"><label><span data-t="contact.fFrom">Von</span> <b class="req">*</b></label><input type="date" id="f-from" name="Von"></div>
           <div class="field"><label><span data-t="contact.fDuration">Voraussichtlich bis</span> <b class="req">*</b></label><input type="date" id="f-duration" name="Voraussichtlich bis" required></div>
         </div>
         <div class="frow">
-          <div class="field"><label data-t="contact.fPersons">Anzahl Monteure</label><input type="number" min="1" id="f-persons" name="Anzahl Monteure"></div>
+          <div class="field"><label><span data-t="contact.fPersons">Anzahl Monteure</span> <b class="req">*</b></label><input type="number" min="1" id="f-persons" name="Anzahl Monteure"></div>
           <div class="field"><label data-t="contact.fApt">Wunsch-Wohnung (optional)</label><select id="f-apt" name="Wunsch-Wohnung"></select></div>
         </div>
-        <div class="field"><label data-t="contact.fMsg">Nachricht</label><textarea id="f-msg" name="Nachricht"></textarea></div>
+        <div class="field"><label><span data-t="contact.fMsg">Nachricht</span> <b class="req">*</b></label><textarea id="f-msg" name="Nachricht"></textarea></div>
         <button type="submit" class="submit" id="sendBtn" data-t="contact.submit">Anfrage senden</button>
         <div class="success" id="successMsg" data-t="contact.success">Vielen Dank! Ihre Anfrage ist bei uns eingegangen – wir melden uns in der Regel noch am selben Werktag.</div>
       </form>
@@ -2511,9 +2511,10 @@ document.getElementById('contactForm').addEventListener('submit',async(e)=>{
   e.preventDefault();
   const form=e.currentTarget;
   const g=id=>document.getElementById(id).value;
-  const durField=document.getElementById('f-duration').closest('.field');
-  if(!g('f-duration')){ durField.classList.add('err'); document.getElementById('f-duration').focus(); alert(tt('contact.durationReq')); return; }
-  durField.classList.remove('err');
+  const required=['f-name','f-company','f-email','f-from','f-duration','f-persons','f-msg'];
+  let firstBad=null;
+  required.forEach(id=>{ const el=document.getElementById(id); const empty=!el.value.trim(); el.closest('.field').classList.toggle('err',empty); if(empty&&!firstBad) firstBad=el; });
+  if(firstBad){ firstBad.scrollIntoView({behavior:'smooth',block:'center'}); firstBad.focus({preventScroll:true}); return; }
   const mailtoFallback=()=>{
     const body=`${tt('contact.fName')}: ${g('f-name')}\n${tt('contact.fCompany')}: ${g('f-company')}\n${tt('contact.fEmail')}: ${g('f-email')}\n${tt('contact.fPhone')}: ${g('f-phone')}\n${tt('contact.fFrom')}: ${g('f-from')}\n${tt('contact.fDuration')}: ${g('f-duration')}\n${tt('contact.fPersons')}: ${g('f-persons')}\n${tt('contact.fApt')}: ${g('f-apt')}\n\n${g('f-msg')}`;
     window.location.href=`mailto:info@psaimmobilien.de?subject=${encodeURIComponent(tt('nav.cta')+' – Monteur Apartments Flensburg')}&body=${encodeURIComponent(body)}`;
@@ -2535,7 +2536,7 @@ document.getElementById('contactForm').addEventListener('submit',async(e)=>{
     mailtoFallback();
   }finally{ btn.disabled=false; }
 });
-document.getElementById('f-duration').addEventListener('change',e=>{ if(e.target.value) e.target.closest('.field').classList.remove('err'); });
+['f-name','f-company','f-email','f-from','f-duration','f-persons','f-msg'].forEach(id=>{ const el=document.getElementById(id); ['input','change'].forEach(ev=>el.addEventListener(ev,()=>{ if(el.value.trim()) el.closest('.field').classList.remove('err'); })); });
 (function(){ const today=new Date().toISOString().slice(0,10); const from=document.getElementById('f-from'), to=document.getElementById('f-duration');
   if(from) from.min=today; if(to) to.min=today;
   if(from&&to) from.addEventListener('change',()=>{ if(from.value) to.min=from.value; }); })();
