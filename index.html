@@ -1706,9 +1706,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:46px 0 30px;fon
         <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span data-t="contact.area">Flensburg & Umgebung</span></div>
         <div class="c-note"><strong data-t="contact.boxTitle">Schnelle Antwort garantiert</strong><p data-t="contact.boxText">Wir bearbeiten Anfragen in der Regel noch am selben Werktag.</p></div>
       </div>
-      <form class="form reveal" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm">
-        <input type="hidden" name="form-name" value="kontakt">
-        <p hidden><label>Bitte leer lassen: <input name="bot-field"></label></p>
+      <form class="form reveal" id="contactForm">
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
         <div class="frow">
           <div class="field"><label data-t="contact.fName">Name</label><input id="f-name" name="Name"></div>
           <div class="field"><label data-t="contact.fCompany">Firma</label><input id="f-company" name="Firma"></div>
@@ -2521,8 +2520,15 @@ document.getElementById('contactForm').addEventListener('submit',async(e)=>{
   };
   const btn=document.getElementById('sendBtn'); btn.disabled=true;
   try{
-    const res=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});
-    if(!res.ok) throw new Error('post failed');
+    const payload=Object.fromEntries(new FormData(form));
+    delete payload['form-name'];
+    payload.access_key='7552c690-7580-4fe8-a773-71df84c327ca';
+    payload.subject='Neue Wohnungsanfrage – Monteur Apartments Flensburg';
+    payload.from_name='Monteur Apartments Flensburg';
+    if(payload['E-Mail']) payload.replyto=payload['E-Mail'];
+    const res=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)});
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok||!data.success) throw new Error('post failed');
     document.getElementById('successMsg').style.display='block';
     form.reset(); renderAptSelect();
   }catch(err){
@@ -2579,7 +2585,7 @@ privacy:`<p class="note">Stand: Oktober 2026. Diese Datenschutzerklärung ist au
 <h4>3. Hosting und Server-Logfiles</h4>
 <p>Beim Aufruf dieser Website werden durch den Hosting-Provider automatisch Informationen in sogenannten Server-Logfiles erfasst, die Ihr Browser übermittelt (u. a. IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, Browsertyp, Betriebssystem). Diese Daten dienen der technischen Bereitstellung, Sicherheit und Stabilität der Website. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Hosting-Anbieter: Netlify, Inc., 512 2nd Street, Suite 200, San Francisco, CA 94107, USA. Die Website wird über das Content-Delivery-Netzwerk von Netlify ausgeliefert; dabei können Server-Logfiles auch auf Servern in den USA verarbeitet werden. Grundlage der Datenübermittlung in die USA sind die EU-Standardvertragsklauseln.</p>
 <h4>4. Kontaktformular und Kontaktaufnahme</h4>
-<p>Wenn Sie uns über das Anfrageformular oder per E-Mail kontaktieren, verarbeiten wir die von Ihnen angegebenen Daten (z. B. Name, Firma, E-Mail, Telefon, Zeitraum, Personenzahl, gewünschte Wohnung sowie Ihre Nachricht) zur Bearbeitung Ihrer Anfrage. Das Formular öffnet Ihr E-Mail-Programm und versendet die Nachricht an uns; die weitere Verarbeitung erfolgt im Rahmen der E-Mail-Korrespondenz. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. lit. f DSGVO. Die Daten werden gelöscht, sobald sie für die Zweckerreichung nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+<p>Wenn Sie uns über das Anfrageformular oder per E-Mail kontaktieren, verarbeiten wir die von Ihnen angegebenen Daten (z. B. Name, Firma, E-Mail, Telefon, Zeitraum, Personenzahl, gewünschte Wohnung sowie Ihre Nachricht) zur Bearbeitung Ihrer Anfrage. Für den Versand des Anfrageformulars nutzen wir den Dienst Web3Forms. Dabei werden die von Ihnen eingegebenen Formulardaten an Web3Forms übermittelt und von dort als E-Mail an uns weitergeleitet. Ist der Versand über Web3Forms technisch nicht möglich, öffnet sich ersatzweise Ihr E-Mail-Programm mit einer vorausgefüllten Nachricht. Mit dem Anbieter von Web3Forms besteht bzw. ist ein Auftragsverarbeitungsvertrag abzuschließen (bitte ergänzen). Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. lit. f DSGVO. Die Daten werden gelöscht, sobald sie für die Zweckerreichung nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
 <h4>5. Kartendarstellung</h4>
 <p>Zur Darstellung unserer Standorte verwenden wir die Open-Source-Bibliothek Leaflet. Das Kartenmaterial (Straßen- und Küstenverlauf) ist direkt in die Website eingebettet und wird lokal ausgeliefert. Beim Anzeigen der Karte werden daher keine Kartenkacheln von externen Servern geladen und keine personenbezogenen Daten (insbesondere keine IP-Adresse) an Dritte übertragen. Die zugrunde liegenden Kartendaten stammen von OpenStreetMap (© OpenStreetMap-Mitwirkende, Lizenz ODbL).</p>
 <h4>6. Schriftarten</h4>
