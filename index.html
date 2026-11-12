@@ -2468,7 +2468,9 @@ function buildLangSelect(){
   const sel=document.getElementById('langsel');
   const ready=LANGS.filter(l=>READY.has(l[0])), soon=LANGS.filter(l=>!READY.has(l[0]));
   const opt=l=>`<option value="${l[0]}"${l[0]===LANG?' selected':''}>${l[1]}</option>`;
-  sel.innerHTML=`<optgroup label="✓ ${LANG==='de'?'Verfügbar':'Available'}">${ready.map(opt).join('')}</optgroup><optgroup label="${LANG==='de'?'In Vorbereitung':'Coming soon'}">${soon.map(opt).join('')}</optgroup>`;
+  sel.innerHTML = soon.length
+    ? `<optgroup label="✓ ${LANG==='de'?'Verfügbar':'Available'}">${ready.map(opt).join('')}</optgroup><optgroup label="${LANG==='de'?'In Vorbereitung':'Coming soon'}">${soon.map(opt).join('')}</optgroup>`
+    : ready.map(opt).join('');
 }
 
 /* ===== MEDIA PICKER ===== */
