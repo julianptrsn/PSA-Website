@@ -837,10 +837,11 @@ header:not(.scrolled) .langsel-flag{box-shadow:0 0 0 1px rgba(255,255,255,.35)}
 .hstat .n{font-family:var(--disp);font-size:2.7rem;font-weight:500;color:var(--ink);letter-spacing:-.03em;font-feature-settings:"tnum" 1;line-height:1}
 .hstat .l{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
 @media(max-width:640px){
-  .statband .wrap{gap:26px 0;padding:26px 16px 22px}
-  .hstat{flex:0 0 50%;padding:4px 10px}
+  .statband .wrap{gap:0;padding:26px 10px 22px;flex-wrap:nowrap}
+  .hstat{flex:1 1 0;min-width:0;padding:4px 4px;gap:5px}
   .hstat+.hstat::before{display:none}
-  .hstat .n{font-size:2.3rem}
+  .hstat .n{font-size:2.05rem}
+  .hstat .l{font-size:.6rem;letter-spacing:.08em}
 }
 @media(prefers-reduced-motion:reduce){.hero-bg{animation:none;transform:none}.hero-scroll .mouse::after{animation:none}}
 
@@ -1122,9 +1123,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:46px 0 30px;fon
   .tools{margin-left:auto}
 }
 @media(max-width:600px){
-  .agal,.svc-grid,.about-stats{grid-template-columns:1fr}
+  .agal{grid-template-columns:1fr}
+  .about-stats{grid-template-columns:1fr 1fr;gap:12px}
+  .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .svc{padding:18px}
+  .about-stats .b{padding:18px}
   .frow{grid-template-columns:1fr}
-  .hstats{gap:22px}
   .langsel-cur{display:none}
   .langsel-btn{padding:8px 11px;gap:6px}
   .tools{gap:10px}
